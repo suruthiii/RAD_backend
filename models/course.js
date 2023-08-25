@@ -19,6 +19,10 @@ const courseschema = new Schema({
     credit : {
         type : String,
         required:true
+    },
+    instructor : {
+        type : String,
+        required:true
     }
 })
 
