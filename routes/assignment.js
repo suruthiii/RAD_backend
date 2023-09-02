@@ -33,6 +33,23 @@ router.route("/view_assignments").get((req,res)=>{
     })
 })
 
+router.route("/viewAssignment/:id").get((req, res) => {
+    let assignmentId = req.params.id;
+
+    assignment.findById(assignmentId)
+        .then((assignment) => {
+            if (assignment) {
+                res.json(assignment);
+            } else {
+                res.status(404).json({ error: "Assignment not found" });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ error: "Failed to retrieve assignment" });
+        });
+});
+
 router.route("/update_assignment/:id").put(async(req,res)=>{
     let userId = req.params.id;
     const{coursename,aname,task,duedate} = req.body;
